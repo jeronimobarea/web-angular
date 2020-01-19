@@ -1,0 +1,122 @@
+<div class="container mt-4 container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="list-group list-group-flush">
+          <form #noticiaForm="ngForm">
+            <div class="list-group-item ">
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="customFileLang"
+                  lang="es"
+                  name="image"
+                  #image="ngModel"
+                  [(ngModel)]="noticiaService.image"
+                />
+                <label class="custom-file-label" for="customFileLang"
+                  >Seleccionar Archivo</label
+                >
+              </div>
+            </div>
+            <input
+              type="hidden"
+              name="_id"
+              #_id="ngModel"
+              [(ngModel)]="noticiaService.noticiaSeleccionada._id"
+            />
+            <div class="input-field list-group-item">
+              <input
+                class="form-control"
+                name="title"
+                #title="ngModel"
+                [(ngModel)]="noticiaService.noticiaSeleccionada.title"
+                placeholder="Introduce un titulo"
+              />
+            </div>
+            <div class="input-field list-group-item">
+              <input
+                class="form-control"
+                name="subtitle"
+                #subtitle="ngModel"
+                [(ngModel)]="noticiaService.noticiaSeleccionada.subtitle"
+                placeholder="Introduce un subtitulo"
+              />
+            </div>
+            <div class="input-field list-group-item">
+              <input
+                class="form-control"
+                name="author"
+                #author="ngModel"
+                [(ngModel)]="noticiaService.noticiaSeleccionada.author"
+                placeholder="Introduce un autor"
+              />
+            </div>
+            <div class="input-field list-group-item">
+              <input
+                class="form-control"
+                name="date"
+                #date="ngModel"
+                [(ngModel)]="noticiaService.noticiaSeleccionada.date"
+                placeholder="Introduce una fecha"
+              />
+            </div>
+            <div class="input-field list-group-item">
+              <input
+                class="form-control"
+                name="content"
+                #content="ngModel"
+                [(ngModel)]="noticiaService.noticiaSeleccionada.content"
+                placeholder="Introduce el contenido"
+              />
+            </div>
+
+            <div class="card-action p-4 d-flex justify-content-center">
+              <div class="input-field col">
+                <button
+                  class="btn btn-success"
+                  (click)="addNoticia(noticiaForm)"
+                >
+                  Guardar
+                </button>
+                <button
+                  class="btn btn-danger ml-3"
+                  (click)="resetForm(noticiaForm)"
+                >
+                  Limpiar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <table class="table table-bordered">
+        <tbody>
+          <tr *ngFor="let noticia of noticiaService.noticias.noticias">
+            <td>
+              <img src="pic_trulli.jpg" style="width: 80px; height: 80px;" />
+            </td>
+            <td>{{ noticia.title }}</td>
+            <td>{{ noticia.subtitle }}</td>
+            <td>{{ noticia.date }}</td>
+            <td>{{ noticia.author }}</td>
+            <td>{{ noticia.content }}</td>
+            <td>
+              <a (click)="editNoticia(noticia, noticiaForm)">
+                <i class="material-icons ">edit</i>
+              </a>
+            </td>
+            <td>
+              <a (click)="deleteNoticia(noticia._id)">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
